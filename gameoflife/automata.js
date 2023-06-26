@@ -30,10 +30,10 @@ class Automata {
     countNumberOfLiveNeighbors (checkCol, checkRow) {
         let neighborCount = 0;
 
-        for (let col = checkCol - 2; col < checkCol + 2; col++) {
-            for (let row = checkRow - 2; row < checkRow + 2; row++) {
+        for (let col = checkCol - 1; col < checkCol + 2; col++) {
+            for (let row = checkRow - 1; row < checkRow + 2; row++) {
                 if (col > 0 && col < this.width && row > 0 && row < this.height) {
-                    if (this.entities[col][row] == 1) {
+                    if (this.entities[col][row] == 1 && col != checkCol && row != checkRow) {
                         neighborCount++;
                     }
                 }
@@ -49,10 +49,16 @@ class Automata {
             for (let row = 0; row < this.height; row++) {
                 let neighborCount = this.countNumberOfLiveNeighbors(col, row);
 
-                if (this.entities[col][row]) {
+                if (this.entities[col][row]) { //1
                     if (neighborCount == 2 || neighborCount == 3) {
                         this.entities[col][row] = 1;
                     } else if (neighborCount < 2 || neighborCount > 3) {
+                        this.entities[col][row] = 0;
+                    }
+                } else {
+                    if (neighborCount == 3) {
+                        this.entities[col][row] = 1;
+                    } else {
                         this.entities[col][row] = 0;
                     }
                 }
