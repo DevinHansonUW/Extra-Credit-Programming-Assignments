@@ -26,6 +26,7 @@ class Automata {
         }
     }
 
+    //TODO: Refactor bounds, check don't update self
     countNumberOfLiveNeighbors (checkCol, checkRow) {
         let neighborCount = 0;
 
@@ -42,15 +43,18 @@ class Automata {
         return neighborCount;
     }
 
+    //TODO: Check rules again
     update() {
         for (let col = 0; col < this.width; col++) {
             for (let row = 0; row < this.height; row++) {
                 let neighborCount = this.countNumberOfLiveNeighbors(col, row);
 
-                if (neighborCount == 2 || neighborCount == 3) {
-                    this.entities[col][row] = 1;
-                } else if (neighborCount < 2 || neighborCount > 3) {
-                    this.entities[col][row] = 0;
+                if (this.entities[col][row]) {
+                    if (neighborCount == 2 || neighborCount == 3) {
+                        this.entities[col][row] = 1;
+                    } else if (neighborCount < 2 || neighborCount > 3) {
+                        this.entities[col][row] = 0;
+                    }
                 }
             }
         }
