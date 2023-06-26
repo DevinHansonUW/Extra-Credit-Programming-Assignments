@@ -26,13 +26,15 @@ class Automata {
         }
     }
 
-    countNumberOfNeighbors (checkCol, checkRow) {
+    countNumberOfLiveNeighbors (checkCol, checkRow) {
         let neighborCount = 0;
 
-        for (let col = checkCol; col < checkCol + 2; col++) {
-            for (let row = checkRow; row < checkRow + 2; row++) {
-                if (this.entities[col][row] == 1) {
-                    neighborCount++;
+        for (let col = checkCol - 2; col < checkCol + 2; col++) {
+            for (let row = checkRow - 2; row < checkRow + 2; row++) {
+                if (col > 0 && col < this.width && row > 0 && row < this.height) {
+                    if (this.entities[col][row] == 1) {
+                        neighborCount++;
+                    }
                 }
             }
         }
@@ -41,7 +43,17 @@ class Automata {
     }
 
     update() {
-        
+        for (let col = 0; col < this.width; col++) {
+            for (let row = 0; row < this.height; row++) {
+                let neighborCount = this.countNumberOfLiveNeighbors(col, row);
+
+                if (neighborCount == 2 || neighborCount == 3) {
+                    this.entities[col][row] = 1;
+                } else if (neighborCount < 2 || neighborCount > 3) {
+                    this.entities[col][row] = 0;
+                }
+            }
+        }
     }
 
     draw(ctx) {
@@ -50,7 +62,7 @@ class Automata {
         ctx.fillStyle = "Black";
         for (let col = 0; col < this.width; col++) {
             for (let row = 0; row < this.height; row++) {
-                let cell = this.automata[col][row];
+                let cell = this.entities[col][row];
                 if (cell) ctx.fillRect(col * size + gap, row * size + gap, size - 2 * gap, size - 2 * gap);
             }
         }
