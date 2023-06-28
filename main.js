@@ -10,5 +10,10 @@ ASSET_MANAGER.downloadAll(() => {
 
 	gameEngine.addEntity(new Automata());
 
+	document.getElementById("restart").addEventListener("click", function() {
+		gameEngine.removeEntity();
+		gameEngine.addEntity(new Automata());
+	})
+
 	gameEngine.start();
 });

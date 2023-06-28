@@ -54,7 +54,7 @@ class Automata {
         for (let col = checkCol - 1; col < checkCol + 2; col++) {
             for (let row = checkRow - 1; row < checkRow + 2; row++) {
                 //Makes sure the col and row are within bounds
-                if (col >= 0 && col < this.width && row >= 0 && row < this.height) {
+                if (col >= 0 && col < this.entities.size && row >= 0 && row < this.entities[col].size) {
                     //Makes sure the neighbor cell is alive and doesn't count itself
                     if (this.entities[col][row] == 1 && (col != checkCol || row != checkRow)) {
                         neighborCount++;
