@@ -33,7 +33,13 @@ class Automata {
     makeRandomLivingEntities () {
         for (let col = 0; col < this.width; col++) {
             for (let row = 0; row < this.height; row++) {
-                this.entities[col][row] = randomInt(2);
+                let chanceAlive = Math.random();
+
+                if (chanceAlive >= 0.05) {
+                    this.entities[col][row] = 1;
+                } else {
+                    this.entities[col][row] = 0;
+                }
             }
         }
     }
