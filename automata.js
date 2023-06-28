@@ -51,7 +51,7 @@ class Automata {
 
         for (let col = 0; col < this.width; col++) {
             for (let row = 0; row < this.height; row++) {
-                if (chanceAlive >= this.randomChance / 4) {
+                if (chanceAlive <= this.randomChance / 4) {
                     this.entities[col][row] = 1;
                 } else {
                     this.entities[col][row] = 0;
@@ -93,10 +93,12 @@ class Automata {
 
     //Goes through each entity cell to determine how it is effected by the rules
     updateEntityGeneration() {
-        let temp = this.makeDupeList();
+        let temp = [];
 
-        for (let col = 0; col < temp.width; col++) {
-            for (let row = 0; row < temp.height; row++) {
+        for (let col = 0; col < this.width; col++) {
+            temp.push([]);
+            
+            for (let row = 0; row < this.height; row++) {
                 //Counts the number of living neighbors to entity cell at position col, row
                 let neighborCount = this.countNumberOfLiveNeighbors(col, row);
 
