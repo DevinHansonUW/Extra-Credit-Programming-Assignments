@@ -9,6 +9,7 @@ class Automata {
         this.speed = parseInt(document.getElementById("speed").value, 10);
         this.count = 0;
         this.tickCount = 0;
+        this.randomChance = parseInt(document.getElementById("randomness").value, 10);
 
         this.entityHue = parseInt(document.getElementById("entityHue").value, 10);
         this.entitySat = parseInt(document.getElementById("entitySat").value, 10);
@@ -33,9 +34,9 @@ class Automata {
     makeRandomLivingEntities () {
         for (let col = 0; col < this.width; col++) {
             for (let row = 0; row < this.height; row++) {
-                let chanceAlive = Math.random();
+                let chanceAlive = this.randomChance * Math.random();
 
-                if (chanceAlive >= 0.05) {
+                if (chanceAlive >= 50) {
                     this.entities[col][row] = 1;
                 } else {
                     this.entities[col][row] = 0;
@@ -96,6 +97,7 @@ class Automata {
             this.count = 0;
             this.tickCount++;
             document.getElementById('ticks').innerHTML = "Ticks: " + this.tickCount;
+            this.randomChance = parseInt(document.getElementById("randomness").value, 10);
 
             this.entityHue = parseInt(document.getElementById("entityHue").value, 10);
             this.entitySat = parseInt(document.getElementById("entitySat").value, 10);
