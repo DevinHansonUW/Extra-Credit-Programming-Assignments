@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Game Project Title Goes Here</title>
   
+    <!-- All javascript files used by the website -->
     <script type="text/javascript" src="./assetmanager.js"></script>
     <script type="text/javascript" src="./timer.js"></script>
     <script type="text/javascript" src="./gameengine.js"></script>
@@ -13,23 +14,46 @@
     <script type="text/javascript" src="./automata.js"></script>
 </head>
 <body>
+    <!-- The main canvas for the simulation window-->
     <canvas id="gameWorld" width="1024" height="768" style="background: white; border: 1px solid black" tabindex="0" autofocus></canvas>
+    <!-- All buttons that can edit the canvas-->
+    <!-- A button to restart the simulation -->
     <div>
         <button id = "restart">Restart</button>
     </div>
+    <!-- All sliders that can edit the canvas-->
     <div>
+        <!-- A slider to determine the speed at which the simulation runs -->
         <div id="ticks">Ticks: 0</div>
         <label for="speed">Fast</label>
         <input type="range" id="speed" min="1" max="120" value="30" step="1">
         <label for="speed">Slow</label>
-    </div>
-    <div>
+
+        <!-- A slider to determine the amount zoomed in to the canvas -->
+        <div id="zoom">Zoom: </div>
+        <label for="zoomSize">Small</label>
+        <input type="range" id="zoomSize" min="1" max="100" value="10" step="1">
+        <label for="zoomSize">Large</label>
+
+        <!-- Sliders to determine the size of the entity space-->
+        <div id="entitySizeLabel">Entity Space Height</div>
+        <label for="entityHeight">Small</label>
+        <input type="range" id="entityHeight" min="100" max="1000" value="200" step="1">
+        <label for="entityHeight">Large</label>
+
+        <div id="entitySizeLabel">Entity Space Width</div>
+        <label for="entityWidth">Small</label>
+        <input type="range" id="entityWidth" min="100" max="1000" value="200" step="1">
+        <label for="entityWidth">Large</label>
+
+        <!-- A slider to determine the random chance for an entity to be alive at the start of the simulation -->
+        <!-- NEED TO CLICK RESTART BUTTON TO TAKE EFFECT -->
         <div id="chance">Randomness: </div>
         <label for="randomness">Less</label>
         <input type="range" id="randomness" min="0" max="100" value="30" step="1">
         <label for="randomness">More</label>
-    </div>
-    <div>
+
+        <!-- Sliders to determine the color of the entities using HSL values -->
         <div id="entityColor">Entity Color: </div>
         <label for="entityHue">Hue</label>
         <input type="range" id="entityHue" min="0" max="360" value="30" step="1">
@@ -39,8 +63,8 @@
 
         <label for="entityLight">Lightness</label>
         <input type="range" id="entityLight" min="0" max="100" value="30" step="1">
-    </div>
-    <div>
+
+        <!-- Sliders to determine the color of the canvas background using HSL values -->
         <div id="backColor">Background Color: </div>
         <label for="backHue">Hue</label>
         <input type="range" id="backHue" min="1" max="120" value="30" step="1">

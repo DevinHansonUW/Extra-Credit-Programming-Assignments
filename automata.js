@@ -4,12 +4,14 @@ class Automata {
         //Setup for all variables for entities and entity list
         this.entities = [];
 
-        this.width =  200;
-        this.height = 200;
+        this.width =  parseInt(document.getElementById("entityWidth").value, 10);
+        this.height = parseInt(document.getElementById("entityHeight").value, 10);
+
         this.speed = parseInt(document.getElementById("speed").value, 10);
         this.count = 0;
         this.tickCount = 0;
         this.randomChance = parseInt(document.getElementById("randomness").value, 10);
+        this.size = parseInt(document.getElementById("zoomSize").value, 10);
 
         this.entityHue = parseInt(document.getElementById("entityHue").value, 10);
         this.entitySat = parseInt(document.getElementById("entitySat").value, 10);
@@ -54,7 +56,7 @@ class Automata {
         for (let col = checkCol - 1; col < checkCol + 2; col++) {
             for (let row = checkRow - 1; row < checkRow + 2; row++) {
                 //Makes sure the col and row are within bounds
-                if (col >= 0 && col < this.entities.size && row >= 0 && row < this.entities[col].size) {
+                if (this.checkBounds(col, row)) {
                     //Makes sure the neighbor cell is alive and doesn't count itself
                     if (this.entities[col][row] == 1 && (col != checkCol || row != checkRow)) {
                         neighborCount++;
@@ -63,7 +65,17 @@ class Automata {
             }
         }
 
+        //Return the number of live neighbors
         return neighborCount;
+    }
+
+    //Checks to see if position is withing bounds or not
+    checkBounds(checkCol, checkRow) {
+        if (checkCol >= 0 && checkCol < this.entities.length && checkRow >= 0 && checkRow < this.entities[checkCol].length) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     //Goes through each entity cell to determine how it is effected by the rules
@@ -80,7 +92,10 @@ class Automata {
                     } else if (neighborCount < 2 || neighborCount > 3) {
                         this.entities[col][row] = 0;
                     }
-                } else if (this.entities[col][row] == 0) { //If cell is dead
+                } 
+
+                //If cell is dead
+                else if (this.entities[col][row] == 0) {
                     if (neighborCount == 3) {
                         this.entities[col][row] = 1;
                     } else {
@@ -99,6 +114,7 @@ class Automata {
             this.count = 0;
             this.tickCount++;
             document.getElementById('ticks').innerHTML = "Ticks: " + this.tickCount;
+            this.size = parseInt(document.getElementById("zoomSize").value, 10);
 
             this.entityHue = parseInt(document.getElementById("entityHue").value, 10);
             this.entitySat = parseInt(document.getElementById("entitySat").value, 10);
@@ -110,13 +126,12 @@ class Automata {
     }
 
     draw(ctx) {
-        let size = 8;
-        let gap = 1;
+        let gap = this.size / 10;
         ctx.fillStyle = this.entityColor;
         for (let col = 0; col < this.width; col++) {
             for (let row = 0; row < this.height; row++) {
                 let cell = this.entities[col][row];
-                if (cell) ctx.fillRect(col * size + gap, row * size + gap, size - 2 * gap, size - 2 * gap);
+                if (cell) ctx.fillRect(col * this.size + gap, row * this.size + gap, this.size - 2 * gap, this.size - 2 * gap);
             }
         }
     }

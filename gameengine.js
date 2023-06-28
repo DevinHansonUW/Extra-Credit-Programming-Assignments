@@ -80,6 +80,7 @@ class GameEngine {
         this.entities.push(entity);
     };
 
+    //Remove the latest entity from the list
     removeEntity() {
         this.entities.pop();
     }
