@@ -8,12 +8,12 @@ ASSET_MANAGER.downloadAll(() => {
 
 	gameEngine.init(ctx);
 
-	gameEngine.addEntity(new Automata());
+	gameEngine.addEntity(new Automata(ctx));
 
 	//Restart the simulation by making a new Automata entity
 	document.getElementById("restart").addEventListener("click", function() {
 		gameEngine.removeEntity();
-		gameEngine.addEntity(new Automata());
+		gameEngine.addEntity(new Automata(ctx));
 	})
 
 	gameEngine.start();

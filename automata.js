@@ -1,6 +1,6 @@
 class Automata {
     //Constructor for Automata class
-    constructor () {
+    constructor (ctx) {
         //Setup for all variables for entities and entity list
         this.entities = [];
 
@@ -18,6 +18,12 @@ class Automata {
         this.entityLight = parseInt(document.getElementById("entityLight").value, 10);
         this.entityColor = hsl(this.entityHue, this.entitySat, this.entityLight);
 
+        this.backHue = parseInt(document.getElementById("backHue").value, 10);
+        this.backSat = parseInt(document.getElementById("backSat").value, 10);
+        this.backLight = parseInt(document.getElementById("backLight").value, 10);
+        this.backColor = hsl(this.backHue, this.backSat, this.backLight);
+        //ctx.style = "background: " + this.backColor + "; border: 1px solid black";
+
         this.makeEmptyEntityList();
         this.makeRandomLivingEntities();
     }
@@ -30,19 +36,6 @@ class Automata {
                 this.entities[col][row] = 0;
             }
         }
-    }
-
-    makeDupeList() {
-        let temp = [];
-
-        for (let col = 0; col < this.width; col++) {
-            temp.push([]);
-            for (let row = 0; row < this.height; row++) {
-                temp[col][row] = 0;
-            }
-        }
-
-        return temp;
     }
     
     //Goes through each cell and randomly determines if it is alive or not
