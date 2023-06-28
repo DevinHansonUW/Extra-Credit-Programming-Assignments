@@ -31,6 +31,19 @@ class Automata {
             }
         }
     }
+
+    makeDupeList() {
+        let temp = [];
+
+        for (let col = 0; col < this.width; col++) {
+            temp.push([]);
+            for (let row = 0; row < this.height; row++) {
+                temp[col][row] = 0;
+            }
+        }
+
+        return temp;
+    }
     
     //Goes through each cell and randomly determines if it is alive or not
     makeRandomLivingEntities () {
@@ -80,30 +93,34 @@ class Automata {
 
     //Goes through each entity cell to determine how it is effected by the rules
     updateEntityGeneration() {
-        for (let col = 0; col < this.width; col++) {
-            for (let row = 0; row < this.height; row++) {
+        let temp = this.makeDupeList();
+
+        for (let col = 0; col < temp.width; col++) {
+            for (let row = 0; row < temp.height; row++) {
                 //Counts the number of living neighbors to entity cell at position col, row
                 let neighborCount = this.countNumberOfLiveNeighbors(col, row);
 
                 //If cell is alive
                 if (this.entities[col][row] == 1) {
                     if (neighborCount == 2 || neighborCount == 3) {
-                        this.entities[col][row] = 1;
+                        temp[col][row] = 1;
                     } else if (neighborCount < 2 || neighborCount > 3) {
-                        this.entities[col][row] = 0;
+                        temp[col][row] = 0;
                     }
                 } 
 
                 //If cell is dead
                 else if (this.entities[col][row] == 0) {
                     if (neighborCount == 3) {
-                        this.entities[col][row] = 1;
+                        temp[col][row] = 1;
                     } else {
-                        this.entities[col][row] = 0;
+                        temp[col][row] = 0;
                     }
                 }
             }
         }
+
+        this.entities = temp;
     }
 
     //Updates values and entity list only at every tick
