@@ -32,10 +32,12 @@ class Automata {
     
     //Goes through each cell and randomly determines if it is alive or not
     makeRandomLivingEntities () {
+        let chanceAlive = Math.floor(Math.random() * this.randomChance);
+
         for (let col = 0; col < this.width; col++) {
             for (let row = 0; row < this.height; row++) {
-                let chanceAlive = Math.floor(Math.random() * this.randomChance);
-
+                chanceAlive = Math.floor(Math.random() * this.randomChance);
+                
                 if (chanceAlive >= 50) {
                     this.entities[col][row] = 1;
                 } else {
