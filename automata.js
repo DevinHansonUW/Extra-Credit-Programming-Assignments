@@ -37,8 +37,8 @@ class Automata {
         for (let col = 0; col < this.width; col++) {
             for (let row = 0; row < this.height; row++) {
                 chanceAlive = Math.floor(Math.random() * this.randomChance);
-                
-                if (chanceAlive >= 50) {
+
+                if (chanceAlive >= this.randomChance/2) {
                     this.entities[col][row] = 1;
                 } else {
                     this.entities[col][row] = 0;
