@@ -22,7 +22,8 @@ class Automata {
         this.backSat = parseInt(document.getElementById("backSat").value, 10);
         this.backLight = parseInt(document.getElementById("backLight").value, 10);
         this.backColor = hsl(this.backHue, this.backSat, this.backLight);
-        //ctx.style = "background: " + this.backColor + "; border: 1px solid black";
+        document.getElementById("gameWorld").style = "background: " + this.backColor + "; border: 1px solid black";
+        //ctx.style.style = "background: " + this.backColor + "; border: 1px solid black";
 
         this.makeEmptyEntityList();
         this.makeRandomLivingEntities();
@@ -132,6 +133,12 @@ class Automata {
             this.entitySat = parseInt(document.getElementById("entitySat").value, 10);
             this.entityLight = parseInt(document.getElementById("entityLight").value, 10);
             this.entityColor = hsl(this.entityHue, this.entitySat, this.entityLight);
+
+            this.backHue = parseInt(document.getElementById("backHue").value, 10);
+            this.backSat = parseInt(document.getElementById("backSat").value, 10);
+            this.backLight = parseInt(document.getElementById("backLight").value, 10);
+            this.backColor = hsl(this.backHue, this.backSat, this.backLight);
+            document.getElementById("gameWorld").style = "background: " + this.backColor + "; border: 1px solid black";
 
             this.updateEntityGeneration();
         }
