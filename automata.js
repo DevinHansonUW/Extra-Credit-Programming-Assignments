@@ -23,7 +23,6 @@ class Automata {
         this.backLight = parseInt(document.getElementById("backLight").value, 10);
         this.backColor = hsl(this.backHue, this.backSat, this.backLight);
         document.getElementById("gameWorld").style = "background: " + this.backColor + "; border: 1px solid black";
-        //ctx.style.style = "background: " + this.backColor + "; border: 1px solid black";
 
         this.makeEmptyEntityList();
         this.makeRandomLivingEntities();
